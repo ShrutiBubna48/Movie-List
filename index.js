@@ -23,6 +23,7 @@ clear.addEventListener("click", () => {
     movies = [];
     console.log(movies);
     list.innerText ="";
+    updateMovieCount();
     display.style.visibility = 'hidden';
 })
 
@@ -31,10 +32,13 @@ show.addEventListener("click", () => {
     if (movies.length===0) {
         alert("No movies added") ;
     } else {
-        renderMovieList();       
+        renderMovieList();
+        updateMovieCount();
     }
 });
-
+function updateMovieCount() {
+    movieCountDisplay.textContent = movies.length;
+}
 function renderMovieList(){
     list.innerText="";
     movies.forEach((movie,index) => {
@@ -49,8 +53,10 @@ function renderMovieList(){
         removeButton.addEventListener("click",()=>{
           movies.splice(index,1);
           renderMovieList();
+          updateMovieCount();
         });
         listItem.appendChild(removeButton);
         list.appendChild(listItem);
     });
+
 }
